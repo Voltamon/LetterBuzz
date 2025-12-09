@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, LayoutGroup } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -101,34 +101,37 @@ export const CardNav: React.FC<CardNavProps> = ({
   }, [items]);
 
   return (
-    <div className={cn('flex items-center gap-1 bg-muted/50 p-1 border border-border relative', className)}>
-      {items.map((item) => (
-        <a
-          key={item.id}
-          href={item.href}
-          onClick={(e) => handleClick(e, item)}
-          className={cn(
-            'relative px-4 py-2 text-sm font-medium transition-colors z-10 cursor-pointer',
-            activeId === item.id
-              ? 'text-foreground'
-              : 'text-muted-foreground hover:text-foreground'
-          )}
-        >
-          {activeId === item.id && (
-            <motion.div
-              layoutId="active-card"
-              className="absolute inset-0 bg-background shadow-sm border border-border"
-              transition={{
-                type: 'spring',
-                bounce: 0.2,
-                duration: 0.6,
-              }}
-              style={{ borderRadius: '0' }}
-            />
-          )}
-          <span className="relative z-10">{item.label}</span>
-        </a>
-      ))}
-    </div>
+    <LayoutGroup>
+      <div className={cn('flex items-center gap-1 bg-muted/50 p-1 border border-border relative', className)}>
+        {items.map((item) => (
+          <a
+            key={item.id}
+            href={item.href}
+            onClick={(e) => handleClick(e, item)}
+            className={cn(
+              'relative px-4 py-2 text-sm font-medium transition-colors z-10 cursor-pointer',
+              activeId === item.id
+                ? 'text-foreground'
+                : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            {activeId === item.id && (
+              <motion.div
+                layoutId="active-card-highlighter"
+                className="absolute inset-0 bg-background shadow-sm border border-border"
+                transition={{
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 30,
+                  mass: 0.8
+                }}
+                style={{ borderRadius: '0' }}
+              />
+            )}
+            <span className="relative z-10">{item.label}</span>
+          </a>
+        ))}
+      </div>
+    </LayoutGroup>
   );
 };
