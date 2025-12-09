@@ -7,31 +7,31 @@ import { ProcessStepper, StepperCard } from "@/components/ui/process-stepper";
 gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
-  {
-    number: "01",
-    title: "Connect",
-    description: "Link your Substack, Beehiiv, or paste your RSS feed URL. We'll import your entire archive automatically.",
-    visual: "import",
-  },
-  {
-    number: "02",
-    title: "Analyze",
-    description: "Our AI scans your content for patterns, engagement signals, and topic opportunities you might have missed.",
-    visual: "analyze",
-  },
-  {
-    number: "03",
-    title: "Generate",
-    description: "Get SEO-optimized topic suggestions and complete markdown drafts tailored to your unique voice.",
-    visual: "generate",
-  },
-  {
-    number: "04",
-    title: "Publish",
-    description: "Export your polished drafts and publish with confidence. Watch your engagement soar.",
-    visual: "publish",
-  },
-];
+{
+  number: "01",
+  title: "Connect",
+  description: "Link your Substack, Beehiiv, or paste your RSS feed URL. We'll import your entire archive automatically.",
+  visual: "import"
+},
+{
+  number: "02",
+  title: "Analyze",
+  description: "Our AI scans your content for patterns, engagement signals, and topic opportunities you might have missed.",
+  visual: "analyze"
+},
+{
+  number: "03",
+  title: "Generate",
+  description: "Get SEO-optimized topic suggestions and complete markdown drafts tailored to your unique voice.",
+  visual: "generate"
+},
+{
+  number: "04",
+  title: "Publish",
+  description: "Export your polished drafts and publish with confidence. Watch your engagement soar.",
+  visual: "publish"
+}];
+
 
 const HowItWorks = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -47,7 +47,7 @@ const HowItWorks = () => {
   const menuItems: FlowingMenuItem[] = steps.map((step, index) => ({
     id: `step-${index}`,
     label: step.title,
-    number: step.number,
+    number: step.number
   }));
 
   // Function to start auto-advance timer
@@ -56,7 +56,7 @@ const HowItWorks = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-    
+
     // Start new interval
     intervalRef.current = setInterval(() => {
       setActiveStep((prevStep) => (prevStep + 1) % steps.length);
@@ -67,7 +67,7 @@ const HowItWorks = () => {
   const handleMenuClick = (id: string) => {
     const stepIndex = parseInt(id.split("-")[1]);
     setActiveStep(stepIndex);
-    
+
     // Reset the timer when user manually clicks
     startAutoAdvance();
   };
@@ -88,8 +88,8 @@ const HowItWorks = () => {
     number: step.number,
     title: step.title,
     description: step.description,
-    visual: step.visual === "import" ? (
-      <div className="space-y-3">
+    visual: step.visual === "import" ?
+    <div className="space-y-3">
         <div className="flex items-center gap-3 text-sm font-mono">
           <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
           <span className="text-muted-foreground">Connecting to Substack...</span>
@@ -98,20 +98,20 @@ const HowItWorks = () => {
           <div className="h-full w-3/4 bg-[hsl(42,88%,63%)] rounded-full" />
         </div>
         <p className="text-xs text-muted-foreground">147 newsletters imported</p>
-      </div>
-    ) : step.visual === "analyze" ? (
-      <div className="grid grid-cols-3 gap-4">
-        {["Topics", "Engagement", "SEO"].map((label) => (
-          <div key={label} className="text-center">
+      </div> :
+    step.visual === "analyze" ?
+    <div className="grid grid-cols-3 gap-4">
+        {["Topics", "Engagement", "SEO"].map((label) =>
+      <div key={label} className="text-center">
             <div className="text-2xl font-bold text-[hsl(42,88%,63%)] mb-1">
               {label === "Topics" ? "24" : label === "Engagement" ? "89%" : "A+"}
             </div>
             <div className="text-xs text-muted-foreground">{label}</div>
           </div>
-        ))}
-      </div>
-    ) : step.visual === "generate" ? (
-      <div className="space-y-2 font-mono text-sm">
+      )}
+      </div> :
+    step.visual === "generate" ?
+    <div className="space-y-2 font-mono text-sm">
         <div className="text-[hsl(42,88%,63%)]"># Your Next Newsletter</div>
         <div className="text-muted-foreground">
           <span className="text-foreground">**Topic:**</span> Growth strategies...
@@ -119,9 +119,9 @@ const HowItWorks = () => {
         <div className="text-muted-foreground">
           <span className="text-foreground">**Hook:**</span> What if I told you...
         </div>
-      </div>
-    ) : (
-      <div className="flex items-center justify-between">
+      </div> :
+
+    <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 bg-[hsl(42,88%,63%)]/10 flex items-center justify-center">
             <span className="text-[hsl(42,88%,63%)] font-bold">✓</span>
@@ -132,7 +132,7 @@ const HowItWorks = () => {
           Export
         </div>
       </div>
-    ),
+
   }));
 
   useEffect(() => {
@@ -142,39 +142,39 @@ const HowItWorks = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none reverse"
         },
         opacity: 0,
         y: 30,
         duration: 0.8,
-        ease: "power3.out",
+        ease: "power3.out"
       });
 
       gsap.from(headingRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none reverse"
         },
         opacity: 0,
         y: 50,
         scale: 0.95,
         duration: 1,
         ease: "power3.out",
-        delay: 0.2,
+        delay: 0.2
       });
 
       gsap.from(descriptionRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none reverse"
         },
         opacity: 0,
         y: 30,
         duration: 0.8,
         ease: "power3.out",
-        delay: 0.4,
+        delay: 0.4
       });
 
       // Menu animation
@@ -182,14 +182,14 @@ const HowItWorks = () => {
         scrollTrigger: {
           trigger: menuRef.current,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none reverse"
         },
         opacity: 0,
         y: 40,
         scale: 0.9,
         duration: 1,
         ease: "back.out(1.7)",
-        delay: 0.2,
+        delay: 0.2
       });
 
       // Stepper animation
@@ -197,13 +197,13 @@ const HowItWorks = () => {
         scrollTrigger: {
           trigger: stepperRef.current,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none reverse"
         },
         opacity: 0,
         y: 60,
         duration: 1.2,
         ease: "power3.out",
-        delay: 0.4,
+        delay: 0.4
       });
     });
 
@@ -211,7 +211,7 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="py-32 overflow-hidden bg-gradient-to-br from-[hsl(42,88%,63%)]/5 via-background to-background relative">
+    <section id="how-it-works" ref={sectionRef} className="py-32 overflow-hidden bg-gradient-to-br from-[hsl(42,88%,63%)]/5 via-background to-background relative !w-[99.9%] !h-[1238px]">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
@@ -230,8 +230,8 @@ const HowItWorks = () => {
             <FlowingMenu
               items={menuItems}
               activeItem={`step-${activeStep}`}
-              onItemClick={handleMenuClick}
-            />
+              onItemClick={handleMenuClick} />
+
           </div>
         </div>
 
@@ -239,12 +239,12 @@ const HowItWorks = () => {
         <div ref={stepperRef} className="max-w-7xl mx-auto">
           <ProcessStepper
             cards={stepperCards}
-            activeIndex={activeStep}
-          />
+            activeIndex={activeStep} />
+
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default HowItWorks;
