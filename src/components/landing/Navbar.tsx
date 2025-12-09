@@ -85,24 +85,24 @@ const Navbar = () => {
 
   return (
     <header ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <div ref={logoRef} className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">LB</span>
+      <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
+        <div ref={logoRef} className="flex items-center gap-2 flex-shrink-0">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-xs sm:text-sm">LB</span>
           </div>
-          <span className="font-semibold text-lg tracking-tight">LetterBuzz</span>
+          <span className="font-semibold text-base sm:text-lg tracking-tight">LetterBuzz</span>
         </div>
         
         {/* Card Nav */}
-        <div ref={navItemsRef} className="hidden md:block">
+        <div ref={navItemsRef} className="hidden md:block flex-shrink-0">
           <CardNav items={tabs} defaultActive={activeTab} />
         </div>
 
-        <div ref={buttonsRef} className="flex items-center gap-3">
+        <div ref={buttonsRef} className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
           <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
             Sign in
           </Button>
-          <Button size="sm">
+          <Button size="sm" className="text-xs sm:text-sm px-3 sm:px-4">
             Get Started
           </Button>
         </div>
