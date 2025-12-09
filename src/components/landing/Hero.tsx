@@ -215,7 +215,7 @@ const Hero = () => {
             </div>
 
             {/* Stats Row */}
-            <div ref={statsRef} className="flex flex-wrap gap-12 pt-8 border-t border-[hsl(16,78%,49%)]/20">
+            <div ref={statsRef} className="flex flex-wrap gap-12 pt-12 border-t border-[hsl(16,78%,49%)]/20">
               <div>
                 <p className="text-3xl font-bold text-[hsl(16,78%,49%)]">10K+</p>
                 <p className="text-sm text-muted-foreground">Newsletters analyzed</p>
