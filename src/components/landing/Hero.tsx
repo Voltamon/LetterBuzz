@@ -168,7 +168,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-to-br from-[hsl(16,78%,49%)]/5 via-background to-background">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-background">
       {/* Background Beams */}
       <BackgroundBeams />
       
