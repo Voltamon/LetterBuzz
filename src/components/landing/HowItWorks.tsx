@@ -211,7 +211,7 @@ const HowItWorks = () => {
   }, []);
 
   return (
-    <section id="how-it-works" ref={sectionRef} className="overflow-hidden bg-gradient-to-br from-[hsl(42,88%,63%)]/5 via-background to-background relative !w-[99.9%] !h-[880px] !text-base !py-0">
+    <section id="how-it-works" ref={sectionRef} className="overflow-hidden bg-background relative !w-[99.9%] !h-[880px] !text-base !py-0">
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
