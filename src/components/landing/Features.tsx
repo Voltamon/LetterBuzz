@@ -192,7 +192,7 @@ const Features = () => {
   }, []);
 
   return (
-    <section id="features" ref={sectionRef} className="pt-8 md:pt-16 pb-2 md:pb-4 bg-gradient-to-br from-[hsl(186,47%,63%)]/5 via-background to-background relative overflow-hidden !w-[99.9%] !h-[938px] !py-14">
+    <section id="features" ref={sectionRef} className="pt-8 md:pt-16 pb-2 md:pb-4 bg-background relative overflow-hidden !w-[99.9%] !h-[938px] !py-14">
       <div className="container mx-auto px-4 md:px-6 !w-full !h-[743px] !my-0 !py-[7px]">
         <div className="max-w-2xl mb-8 md:mb-12">
           <p ref={badgeRef} className="text-sm font-medium text-[hsl(186,47%,63%)] uppercase tracking-wider mb-2">Features</p>

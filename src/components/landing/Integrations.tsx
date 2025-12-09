@@ -290,7 +290,7 @@ const Integrations = ({ standalone = false }: IntegrationsProps) => {
   }, [standalone]);
 
   return (
-    <section id="integrations" ref={sectionRef} className="py-32 bg-card">
+    <section id="integrations" ref={sectionRef} className="py-32 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p ref={badgeRef} className="text-sm font-medium text-primary uppercase tracking-wider mb-4">Integrations</p>
