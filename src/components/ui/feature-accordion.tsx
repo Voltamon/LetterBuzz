@@ -99,7 +99,7 @@ export const FeatureAccordion = ({
 
 
 
-      <div className="w-full max-w-7xl space-y-8">
+      <div className="w-full max-w-7xl mx-auto space-y-8">
         {/* 3D Card Container with Layered Effect - GPU Accelerated */}
         <div className="relative gpu-accelerated" style={{ perspective: '1000px' }}>
           {/* Shadow Card 1 - Deepest layer */}
