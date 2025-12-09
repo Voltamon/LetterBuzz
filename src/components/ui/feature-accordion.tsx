@@ -21,29 +21,29 @@ interface FeatureAccordionProps {
   autoPlayInterval?: number; // milliseconds
 }
 
-export const FeatureAccordion = ({ 
-  items, 
+export const FeatureAccordion = ({
+  items,
   className,
-  autoPlayInterval = 10000 
+  autoPlayInterval = 10000
 }: FeatureAccordionProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   // Auto-play effect with timer reset capability
   const startTimer = () => {
     // Clear existing timer
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
-    
+
     // Start new timer
     timerRef.current = setInterval(() => {
-      setActiveIndex(prev => {
+      setActiveIndex((prev) => {
         return prev === items.length - 1 ? 0 : prev + 1;
       });
     }, autoPlayInterval);
   };
-  
+
   useEffect(() => {
     startTimer();
     return () => {
@@ -52,38 +52,38 @@ export const FeatureAccordion = ({
       }
     };
   }, [items.length, autoPlayInterval]);
-  
+
   const currentItem = items[activeIndex];
   const barOnLeft = activeIndex % 2 === 0;
-  
+
   const handlePrevious = () => {
-    setActiveIndex(prev => {
+    setActiveIndex((prev) => {
       // Don't loop - stay at first feature
       if (prev === 0) return prev;
       return prev - 1;
     });
     startTimer();
   };
-  
+
   const handleNext = () => {
-    setActiveIndex(prev => {
+    setActiveIndex((prev) => {
       // Don't loop - stay at last feature
       if (prev === items.length - 1) return prev;
       return prev + 1;
     });
     startTimer();
   };
-  
+
   const handleDotClick = (index: number) => {
     setActiveIndex(index);
     startTimer();
   };
-  
+
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const cardWidth = rect.width;
-    
+
     // Click on left half = previous, right half = next
     if (clickX < cardWidth / 2) {
       handlePrevious();
@@ -91,14 +91,14 @@ export const FeatureAccordion = ({
       handleNext();
     }
   };
-  
+
   return (
-    <div 
-      className={cn(
-        "w-full min-h-screen flex items-center justify-center p-4 md:p-8",
-        className
-      )}
-    >
+    <div
+      className="!w-[99.9%] !h-full">
+
+
+
+
       <div className="w-full max-w-7xl space-y-8">
         {/* 3D Card Container with Layered Effect - GPU Accelerated */}
         <div className="relative gpu-accelerated" style={{ perspective: '1000px' }}>
@@ -110,11 +110,11 @@ export const FeatureAccordion = ({
               "transform translate-x-3 translate-y-3 blur-[1px]",
               "gpu-accelerated"
             )}
-            style={{ 
+            style={{
               zIndex: 0,
               transformStyle: 'preserve-3d'
-            }}
-          />
+            }} />
+
           
           {/* Shadow Card 2 - Middle layer */}
           <div
@@ -124,11 +124,11 @@ export const FeatureAccordion = ({
               "transform translate-x-1.5 translate-y-1.5",
               "gpu-accelerated"
             )}
-            style={{ 
+            style={{
               zIndex: 1,
               transformStyle: 'preserve-3d'
-            }}
-          />
+            }} />
+
           
           {/* Main Card - Top layer - Optimized transitions */}
           <div
@@ -139,10 +139,10 @@ export const FeatureAccordion = ({
               "shadow-xl h-[400px] md:h-[500px]",
               "gpu-accelerated"
             )}
-            style={{ 
+            style={{
               zIndex: 2,
               transformStyle: 'preserve-3d',
-              transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out',
+              transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px) translateX(-2px)';
@@ -151,12 +151,12 @@ export const FeatureAccordion = ({
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0) translateX(0)';
               e.currentTarget.style.boxShadow = '';
-            }}
-          >
+            }}>
+
             {/* Animated Orange Bar - Optimized with GPU acceleration */}
             <motion.div
               initial={{ left: "0%" }}
-              animate={{ 
+              animate={{
                 left: barOnLeft ? "0%" : "calc(100% - 120px)"
               }}
               transition={{
@@ -170,8 +170,8 @@ export const FeatureAccordion = ({
                 "flex flex-col items-center justify-center h-full",
                 "bg-primary overflow-hidden z-10",
                 "gpu-accelerated"
-              )}
-            >
+              )}>
+
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`bar-content-${activeIndex}`}
@@ -179,20 +179,20 @@ export const FeatureAccordion = ({
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="flex flex-col items-center justify-center h-full py-8"
-                >
+                  className="flex flex-col items-center justify-center h-full py-8">
+
                   <div className="font-bold mb-4 text-primary-foreground/30 text-4xl lg:text-5xl">
                     {String(activeIndex + 1).padStart(2, '0')}
                   </div>
                   
                   <div className="flex items-center justify-center flex-1">
-                    <h3 
+                    <h3
                       className="font-bold tracking-tight whitespace-nowrap text-primary-foreground text-lg lg:text-2xl"
                       style={{
                         writingMode: "vertical-rl",
                         textOrientation: "mixed"
-                      }}
-                    >
+                      }}>
+
                       {currentItem.title}
                     </h3>
                   </div>
@@ -202,43 +202,43 @@ export const FeatureAccordion = ({
 
             {/* Content Section - Optimized animations */}
             <div className="flex-1 overflow-hidden w-full">
-              <div 
+              <div
                 className={cn(
                   "flex flex-col h-full overflow-y-auto smooth-scroll p-4 md:p-6 lg:p-12",
                   barOnLeft ? "pl-[130px] md:pl-[140px] items-end text-right" : "pr-[130px] md:pr-[140px] items-start text-left"
                 )}
-                style={{ transition: 'padding 0.6s ease-out' }}
-              >
+                style={{ transition: 'padding 0.6s ease-out' }}>
+
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`content-${activeIndex}`}
-                    initial={{ 
-                      opacity: 0, 
-                      x: barOnLeft ? 40 : -40 
+                    initial={{
+                      opacity: 0,
+                      x: barOnLeft ? 40 : -40
                     }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ 
-                      opacity: 0, 
-                      x: barOnLeft ? -40 : 40 
+                    exit={{
+                      opacity: 0,
+                      x: barOnLeft ? -40 : 40
                     }}
-                    transition={{ 
+                    transition={{
                       duration: 0.4,
                       ease: "easeOut"
                     }}
-                    className="space-y-3 md:space-y-4 lg:space-y-5 w-full max-w-2xl py-2 gpu-accelerated"
-                  >
-                    {currentItem.content.map((section, sectionIndex) => (
-                      <motion.div
-                        key={sectionIndex}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ 
-                          delay: 0.1 + (sectionIndex * 0.08),
-                          duration: 0.35,
-                          ease: "easeOut"
-                        }}
-                        className="space-y-0.5 md:space-y-1"
-                      >
+                    className="space-y-3 md:space-y-4 lg:space-y-5 w-full max-w-2xl py-2 gpu-accelerated">
+
+                    {currentItem.content.map((section, sectionIndex) =>
+                    <motion.div
+                      key={sectionIndex}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: 0.1 + sectionIndex * 0.08,
+                        duration: 0.35,
+                        ease: "easeOut"
+                      }}
+                      className="space-y-0.5 md:space-y-1">
+
                         <h4 className="text-lg md:text-xl lg:text-2xl font-bold tracking-tight text-foreground">
                           {section.heading}
                         </h4>
@@ -246,7 +246,7 @@ export const FeatureAccordion = ({
                           {section.description}
                         </p>
                       </motion.div>
-                    ))}
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -256,22 +256,22 @@ export const FeatureAccordion = ({
 
         {/* Progress indicator - GPU accelerated */}
         <div className="flex items-center justify-center gap-2">
-          {items.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handleDotClick(index)}
-              className={cn(
-                "h-2 rounded-full gpu-accelerated",
-                index === activeIndex 
-                  ? "w-8 bg-primary" 
-                  : "w-2 bg-border hover:bg-muted-foreground"
-              )}
-              style={{ transition: 'all 0.3s ease-out' }}
-              aria-label={`Go to feature ${index + 1}`}
-            />
-          ))}
+          {items.map((_, index) =>
+          <button
+            key={index}
+            onClick={() => handleDotClick(index)}
+            className={cn(
+              "h-2 rounded-full gpu-accelerated",
+              index === activeIndex ?
+              "w-8 bg-primary" :
+              "w-2 bg-border hover:bg-muted-foreground"
+            )}
+            style={{ transition: 'all 0.3s ease-out' }}
+            aria-label={`Go to feature ${index + 1}`} />
+
+          )}
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
