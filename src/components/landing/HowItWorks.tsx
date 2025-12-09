@@ -41,6 +41,7 @@ const HowItWorks = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const stepperRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Create menu items from steps
   const menuItems: FlowingMenuItem[] = steps.map((step, index) => ({
@@ -49,19 +50,37 @@ const HowItWorks = () => {
     number: step.number,
   }));
 
+  // Function to start auto-advance timer
+  const startAutoAdvance = () => {
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    
+    // Start new interval
+    intervalRef.current = setInterval(() => {
+      setActiveStep((prevStep) => (prevStep + 1) % steps.length);
+    }, 5000);
+  };
+
   // Handle menu item click - change active step and reset timer
   const handleMenuClick = (id: string) => {
     const stepIndex = parseInt(id.split("-")[1]);
     setActiveStep(stepIndex);
+    
+    // Reset the timer when user manually clicks
+    startAutoAdvance();
   };
 
   // Auto-advance to next step every 5 seconds with loop
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStep((prevStep) => (prevStep + 1) % steps.length);
-    }, 5000);
+    startAutoAdvance();
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
 
   // Create stepper cards with visual components

@@ -379,20 +379,6 @@ const Integrations = ({ standalone = false }: IntegrationsProps) => {
                       </div>
                     ))}
                   </div>
-
-                  {/* Draft generation note */}
-                  {guideIndex === setupGuides.length - 1 && (
-                    <div className="mt-6 pt-6 border-t border-border">
-                      <div className="flex items-start gap-2">
-                        <FileText className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                        <p className="text-xs text-muted-foreground">
-                          <strong className="text-foreground">Draft Generation:</strong> After import, 
-                          LetterBuzz analyzes your writing style, topic patterns, and audience engagement 
-                          to create personalized newsletter drafts automatically.
-                        </p>
-                      </div>
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
