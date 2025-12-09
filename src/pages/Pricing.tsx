@@ -234,7 +234,7 @@ const Pricing = () => {
               <div
                 key={plan.name}
                 onClick={() => setSelectedPlan(plan.name)}
-                className={`relative bg-card border-2 p-4 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-xl cursor-pointer ${
+                className={`relative bg-card border-2 p-4 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-xl cursor-pointer flex flex-col ${
                   selectedPlan === plan.name
                     ? "border-primary md:scale-105"
                     : "border-border hover:border-primary/50"
@@ -253,7 +253,7 @@ const Pricing = () => {
                   </div>
                 </div>
 
-                <ul className="space-y-2 sm:space-y-3 md:space-y-4 mb-4 sm:mb-6 md:mb-8">
+                <ul className="space-y-2 sm:space-y-3 md:space-y-4 mb-4 sm:mb-6 md:mb-8 flex-grow">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2 sm:gap-3">
                       <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0 mt-0.5" />
@@ -263,7 +263,7 @@ const Pricing = () => {
                 </ul>
 
                 <Button
-                  className="w-full text-sm"
+                  className="w-full text-sm mt-auto"
                   variant={selectedPlan === plan.name ? "default" : "outline"}
                   size="lg"
                 >
