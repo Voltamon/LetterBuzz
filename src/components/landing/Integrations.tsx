@@ -99,10 +99,6 @@ const setupGuides = [
       {
         step: "Configure Settings",
         description: "Set import frequency (daily/weekly) and choose whether to import future posts automatically"
-      },
-      {
-        step: "Start Generating",
-        description: "Once imported, LetterBuzz analyzes your content library and generates SEO-optimized drafts based on your writing style and audience engagement patterns."
       }
     ]
   }
