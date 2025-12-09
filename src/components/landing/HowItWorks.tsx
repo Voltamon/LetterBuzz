@@ -49,11 +49,20 @@ const HowItWorks = () => {
     number: step.number,
   }));
 
-  // Handle menu item click - change active step
+  // Handle menu item click - change active step and reset timer
   const handleMenuClick = (id: string) => {
     const stepIndex = parseInt(id.split("-")[1]);
     setActiveStep(stepIndex);
   };
+
+  // Auto-advance to next step every 5 seconds with loop
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStep((prevStep) => (prevStep + 1) % steps.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Create stepper cards with visual components
   const stepperCards: StepperCard[] = steps.map((step) => ({

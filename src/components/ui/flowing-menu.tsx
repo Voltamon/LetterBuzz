@@ -27,7 +27,8 @@ export const FlowingMenu = ({
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // Function to update indicator position
+  const updateIndicator = () => {
     const activeIndex = items.findIndex(item => item.id === activeItem);
     const activeElement = itemRefs.current[activeIndex];
     
@@ -44,6 +45,23 @@ export const FlowingMenu = ({
         });
       }
     }
+  };
+
+  useEffect(() => {
+    updateIndicator();
+  }, [activeItem, items]);
+
+  // Add resize listener to adjust indicator on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      updateIndicator();
+    };
+
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [activeItem, items]);
 
   return (
