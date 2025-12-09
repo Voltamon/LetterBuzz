@@ -1,7 +1,7 @@
 import Footer from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import {
   Table,
@@ -25,7 +25,6 @@ const pricingPlans = [
       "1 team member",
     ],
     cta: "Start Free Trial",
-    featured: false,
   },
   {
     name: "Professional",
@@ -41,7 +40,6 @@ const pricingPlans = [
       "Custom integrations",
     ],
     cta: "Get Started",
-    featured: true,
   },
   {
     name: "Enterprise",
@@ -58,7 +56,6 @@ const pricingPlans = [
       "Custom SLA",
     ],
     cta: "Contact Sales",
-    featured: false,
   },
 ];
 
@@ -141,6 +138,7 @@ const Pricing = () => {
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const comparisonRef = useRef<HTMLDivElement>(null);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -235,21 +233,14 @@ const Pricing = () => {
             {pricingPlans.map((plan) => (
               <div
                 key={plan.name}
-                className={`relative bg-card border-2 p-4 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-xl ${
-                  plan.featured
+                onClick={() => setSelectedPlan(plan.name)}
+                className={`relative bg-card border-2 p-4 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-xl cursor-pointer ${
+                  selectedPlan === plan.name
                     ? "border-primary md:scale-105"
                     : "border-border hover:border-primary/50"
                 }`}
                 style={{ opacity: 1 }}
               >
-                {plan.featured && (
-                  <div className="absolute -top-3 sm:-top-4 left-1/2 -translate-x-1/2">
-                    <span className="bg-primary text-primary-foreground px-3 sm:px-4 py-1 text-xs sm:text-sm font-semibold">
-                      MOST POPULAR
-                    </span>
-                  </div>
-                )}
-
                 <div className="mb-4 sm:mb-6">
                   <h3 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2">{plan.name}</h3>
                   <p className="text-muted-foreground text-xs sm:text-sm">{plan.description}</p>
@@ -273,7 +264,7 @@ const Pricing = () => {
 
                 <Button
                   className="w-full text-sm"
-                  variant={plan.featured ? "default" : "outline"}
+                  variant={selectedPlan === plan.name ? "default" : "outline"}
                   size="lg"
                 >
                   {plan.cta}
