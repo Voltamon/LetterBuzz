@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -266,8 +267,9 @@ const Pricing = () => {
                   className="w-full text-sm mt-auto"
                   variant={selectedPlan === plan.name ? "default" : "outline"}
                   size="lg"
+                  asChild
                 >
-                  {plan.cta}
+                  <Link to="/login?mode=signup">{plan.cta}</Link>
                 </Button>
               </div>
             ))}

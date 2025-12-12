@@ -203,6 +203,15 @@ Gruvbox color palette:
   .smooth-scroll {
     -webkit-overflow-scrolling: touch;
   }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Animations */

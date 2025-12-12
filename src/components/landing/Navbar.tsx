@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { CardNav, type NavItem } from "@/components/ui/card-nav";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useEffect, useRef, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { Menu } from "lucide-react";
 
@@ -134,11 +134,11 @@ const Navbar = () => {
                 </button>
               ))}
               <div className="border-t border-border pt-4 mt-2 flex flex-col gap-2">
-                <Button variant="outline" className="w-full">
-                  Sign in
+                <Button variant="outline" className="w-full" asChild>
+                  <Link to="/login">Sign in</Link>
                 </Button>
-                <Button className="w-full">
-                  Get Started
+                <Button className="w-full" asChild>
+                  <Link to="/login?mode=signup">Get Started</Link>
                 </Button>
               </div>
             </div>
@@ -147,11 +147,11 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div ref={buttonsRef} className="hidden md:flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <Button variant="ghost" size="sm">
-            Sign in
+          <Button variant="ghost" size="sm" asChild>
+            <Link to="/login">Sign in</Link>
           </Button>
-          <Button size="sm" className="text-xs sm:text-sm px-3 sm:px-4">
-            Get Started
+          <Button size="sm" className="text-xs sm:text-sm px-3 sm:px-4" asChild>
+            <Link to="/login?mode=signup">Get Started</Link>
           </Button>
         </div>
       </nav>

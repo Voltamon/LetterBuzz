@@ -8,12 +8,13 @@ import Navbar from "@/components/landing/Navbar";
 import Index from "./pages/Index";
 import IntegrationsPage from "./pages/Integrations";
 import Pricing from "./pages/Pricing";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import AppPage from "./pages/App";
 import HoverReceiver from "@/visual-edits/VisualEditsMessenger";
 
 const queryClient = new QueryClient();
 
-// ScrollToTop component that triggers on route change
 const ScrollToTop = () => {
   const location = useLocation();
 
@@ -24,8 +25,27 @@ const ScrollToTop = () => {
   return null;
 };
 
+const AppLayout = () => {
+  const location = useLocation();
+  const hideNavbar = location.pathname === "/login" || location.pathname === "/app";
+
+  return (
+    <>
+      <ScrollToTop />
+      {!hideNavbar && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/integrations" element={<IntegrationsPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/app" element={<AppPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+};
+
 const App = () => {
-  // Force dark mode always
   useEffect(() => {
     document.documentElement.classList.add('dark');
   }, []);
@@ -37,15 +57,7 @@ const App = () => {
         <Sonner />
         <HoverReceiver />
         <BrowserRouter>
-          <ScrollToTop />
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/integrations" element={<IntegrationsPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AppLayout />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
