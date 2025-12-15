@@ -14,10 +14,10 @@ type Config struct {
 
 func LoadConfig() *Config {
 	return &Config{
-		GoogleClientID:     "575905650718-47vkndfn4uf8kkcl5r1cj253ghuka4hp.apps.googleusercontent.com",
-		GoogleClientSecret: "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",
-		RedirectURL:        "http://localhost:5173/payment?status=success",
-		JWTSecret:          "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",
+		GoogleClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
+		GoogleClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
+		RedirectURL:        os.Getenv("REDIRECT_URL"),
+		JWTSecret:          os.Getenv("JWT_SECRET"),
 		StripeSecretKey:    os.Getenv("STRIPE_SECRET_KEY"),
 	}
 }
