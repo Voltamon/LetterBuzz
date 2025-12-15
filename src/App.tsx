@@ -10,9 +10,7 @@ import IntegrationsPage from "./pages/Integrations";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-import AppPage from "./pages/App";
-import PaymentPage from "./pages/Payment";
-import OAuthRedirect from "./pages/OAuthRedirect";
+import Payment from "./pages/Payment";
 import HoverReceiver from "@/visual-edits/VisualEditsMessenger";
 
 const queryClient = new QueryClient();
@@ -40,9 +38,7 @@ const AppLayout = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/integrations" element={<IntegrationsPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/oauth/redirect" element={<OAuthRedirect />} />
-        <Route path="/app" element={<AppPage />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

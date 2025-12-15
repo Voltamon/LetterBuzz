@@ -65,7 +65,8 @@ const logErrorsPlugin = () => ({
 export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
-    port: 3000,
+    port: 5173,
+    strictPort: true,
   },
   plugins: [
     react(),
