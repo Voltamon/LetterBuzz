@@ -112,7 +112,7 @@ const HowItWorks = () => {
       </div> :
     step.visual === "generate" ?
     <div className="space-y-2 font-mono text-sm">
-        <div className="text-[hsl(42,88%,63%)]"># Your Next Newsletter</div>
+        <div className="text-[hsl(16,78%,49%)]"># Your Next Newsletter</div>
         <div className="text-muted-foreground">
           <span className="text-foreground">**Topic:**</span> Growth strategies...
         </div>
@@ -123,12 +123,12 @@ const HowItWorks = () => {
 
     <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 bg-[hsl(42,88%,63%)]/10 flex items-center justify-center">
-            <span className="text-[hsl(42,88%,63%)] font-bold">✓</span>
+          <div className="w-10 h-10 bg-[hsl(16,78%,49%)]/10 flex items-center justify-center">
+            <span className="text-[hsl(16,78%,49%)] font-bold">✓</span>
           </div>
           <span className="text-sm font-medium">Ready to publish</span>
         </div>
-        <div className="px-4 py-2 bg-[hsl(42,88%,63%)] text-[hsl(240,2%,13%)] text-sm font-medium">
+        <div className="px-4 py-2 bg-[hsl(16,78%,49%)] text-[hsl(240,2%,13%)] text-sm font-medium">
           Export
         </div>
       </div>
@@ -215,11 +215,11 @@ const HowItWorks = () => {
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <p ref={badgeRef} className="text-sm font-medium text-[hsl(42,88%,63%)] uppercase tracking-wider mb-4">
+          <p ref={badgeRef} className="text-sm font-medium text-[hsl(16,78%,49%)] uppercase tracking-wider mb-4">
             Process
           </p>
           <h2 ref={headingRef} className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-            How it <span className="text-[hsl(42,88%,63%)]">works</span>
+            How it <span className="text-[hsl(16,78%,49%)]">works</span>
           </h2>
           <p ref={descriptionRef} className="text-lg text-muted-foreground max-w-xl mx-auto mb-12">
             From import to publish in four simple steps. No technical knowledge required.

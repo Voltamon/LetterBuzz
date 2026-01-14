@@ -195,9 +195,9 @@ const Features = () => {
     <section id="features" ref={sectionRef} className="pt-8 md:pt-16 pb-2 md:pb-4 bg-background relative overflow-hidden !w-[99.9%] !h-[938px] !py-14">
       <div className="container mx-auto px-4 md:px-6 !w-full !h-[743px] !my-0 !py-[7px]">
         <div className="max-w-2xl mb-8 md:mb-12">
-          <p ref={badgeRef} className="text-sm font-medium text-[hsl(186,47%,63%)] uppercase tracking-wider mb-2">Features</p>
+          <p ref={badgeRef} className="text-sm font-medium text-[hsl(16,78%,49%)] uppercase tracking-wider mb-2">Features</p>
           <h2 ref={headingRef} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-2 md:mb-3">
-            How we help you <span className="text-[hsl(186,47%,63%)]">grow</span>
+            How we help you <span className="text-[hsl(16,78%,49%)]">grow</span>
           </h2>
           <p ref={descriptionRef} className="text-base md:text-lg text-muted-foreground">
             Discover the methodology behind creating newsletters that engage, convert, and scale.

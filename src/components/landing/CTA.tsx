@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -111,7 +112,7 @@ const CTA = () => {
       if (cardRef.current) {
         const card = cardRef.current;
         let tiltAnimationFrame: number;
-        
+
         // Enhanced mouse move tilt - more responsive in all directions
         card.addEventListener('mousemove', (e) => {
           if (tiltAnimationFrame) {
@@ -122,14 +123,14 @@ const CTA = () => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
+
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
+
             // Calculate tilt angles - increased sensitivity for all directions
             const rotateX = ((y - centerY) / centerY) * 15; // -15 to 15 degrees (top to bottom)
             const rotateY = ((centerX - x) / centerX) * 15; // -15 to 15 degrees (left to right)
-            
+
             // Calculate distance from center for scale effect
             const distance = Math.sqrt(
               Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
@@ -138,7 +139,7 @@ const CTA = () => {
               Math.pow(centerX, 2) + Math.pow(centerY, 2)
             );
             const proximity = 1 - (distance / maxDistance);
-            
+
             gsap.to(card, {
               rotationX: -rotateX, // Inverted for natural feel
               rotationY: rotateY,
@@ -149,12 +150,12 @@ const CTA = () => {
             });
           });
         });
-        
+
         card.addEventListener('mouseleave', () => {
           if (tiltAnimationFrame) {
             cancelAnimationFrame(tiltAnimationFrame);
           }
-          
+
           gsap.to(card, {
             rotationX: 0,
             rotationY: 0,
@@ -166,11 +167,11 @@ const CTA = () => {
 
         // Add continuous floating tilt animation when not hovering
         let isHovering = false;
-        
+
         card.addEventListener('mouseenter', () => {
           isHovering = true;
         });
-        
+
         card.addEventListener('mouseleave', () => {
           isHovering = false;
         });
@@ -184,7 +185,7 @@ const CTA = () => {
           yoyo: true,
           ease: "sine.inOut",
           paused: false,
-          onUpdate: function() {
+          onUpdate: function () {
             // Pause the animation if user is hovering
             if (isHovering && !this.paused()) {
               this.pause();
@@ -204,25 +205,25 @@ const CTA = () => {
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-[hsl(16,78%,49%)] rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[hsl(186,47%,63%)] rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[hsl(16,78%,49%)] rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-6 relative" style={{ perspective: '2000px' }}>
         <div className="max-w-6xl mx-auto">
           {/* Main CTA Card with Enhanced Tilt Effect and Shining Animation */}
-          <div 
-            ref={cardRef} 
+          <div
+            ref={cardRef}
             className="bg-card border-2 border-[hsl(16,78%,49%)]/30 p-10 md:p-14 lg:p-20 relative shadow-2xl cursor-pointer overflow-hidden group"
-            style={{ 
+            style={{
               transformStyle: 'preserve-3d',
               transform: 'rotateY(-2deg) rotateX(1deg)',
               willChange: 'transform'
             }}
           >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[hsl(16,78%,49%)] via-[hsl(42,88%,63%)] to-[hsl(186,47%,63%)]" />
-            
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[hsl(16,78%,49%)] via-[hsl(16,78%,49%)] to-[hsl(16,78%,49%)]" />
+
             {/* Shining effect overlay */}
-            <div 
+            <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
               style={{
                 background: 'linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.08) 60%, transparent 80%)',
@@ -230,25 +231,25 @@ const CTA = () => {
                 animation: 'shine 2s infinite'
               }}
             />
-            
+
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center relative z-10">
               <div>
                 <h2 ref={headingRef} className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 md:mb-8">
                   Ready to <span className="text-[hsl(16,78%,49%)]">grow</span> your newsletter?
                 </h2>
                 <p ref={descriptionRef} className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-10 leading-relaxed">
-                  Join thousands of creators using AI to understand their audience 
+                  Join thousands of creators using AI to understand their audience
                   and create content that converts.
                 </p>
-                
+
                 <div ref={buttonsRef} className="flex flex-wrap gap-4 md:gap-5">
-                  <Button size="lg" className="group text-base bg-[hsl(16,78%,49%)] hover:bg-[hsl(16,78%,45%)]">
-                    Start for free
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <Button size="lg" className="group text-base bg-[hsl(16,78%,49%)] hover:bg-[hsl(16,78%,45%)]" asChild>
+                    <Link to="/app">
+                      Start analyzing
+                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
                   </Button>
-                  <Button variant="outline" size="lg" className="text-base border-[hsl(16,78%,49%)]/30 hover:bg-[hsl(16,78%,49%)]/10">
-                    Schedule demo
-                  </Button>
+
                 </div>
               </div>
 
@@ -263,20 +264,20 @@ const CTA = () => {
                     <p className="text-sm md:text-base text-muted-foreground">No credit card required. Analyze up to 50 posts free.</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4 md:gap-5">
-                  <div className="w-9 h-9 md:w-10 md:h-10 bg-[hsl(186,47%,63%)]/10 flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-[hsl(186,47%,63%)] text-base">✓</span>
+                  <div className="w-9 h-9 md:w-10 md:h-10 bg-[hsl(16,78%,49%)]/10 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[hsl(16,78%,49%)] text-base">✓</span>
                   </div>
                   <div>
                     <p className="font-medium text-base md:text-lg">Export anywhere</p>
                     <p className="text-sm md:text-base text-muted-foreground">Clean markdown output works with any platform.</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-4 md:gap-5">
-                  <div className="w-9 h-9 md:w-10 md:h-10 bg-[hsl(42,88%,63%)]/10 flex items-center justify-center flex-shrink-0 mt-1">
-                    <span className="text-[hsl(42,88%,63%)] text-base">✓</span>
+                  <div className="w-9 h-9 md:w-10 md:h-10 bg-[hsl(16,78%,49%)]/10 flex items-center justify-center flex-shrink-0 mt-1">
+                    <span className="text-[hsl(16,78%,49%)] text-base">✓</span>
                   </div>
                   <div>
                     <p className="font-medium text-base md:text-lg">Cancel anytime</p>

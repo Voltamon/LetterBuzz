@@ -8,8 +8,6 @@ import { Menu } from "lucide-react";
 
 const tabs: NavItem[] = [
   { id: "home", label: "Home", href: "/" },
-  { id: "pricing", label: "Pricing", href: "/pricing" },
-  { id: "integrations", label: "Integrations", href: "/integrations" },
 ];
 
 const Navbar = () => {
@@ -65,7 +63,7 @@ const Navbar = () => {
       let lastScroll = 0;
       const handleScroll = () => {
         const currentScroll = window.scrollY;
-        
+
         if (currentScroll > lastScroll && currentScroll > 100) {
           // Scrolling down
           gsap.to(navRef.current, {
@@ -81,7 +79,7 @@ const Navbar = () => {
             ease: "power2.inOut",
           });
         }
-        
+
         lastScroll = currentScroll;
       };
 
@@ -96,12 +94,10 @@ const Navbar = () => {
     <header ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
         <div ref={logoRef} className="flex items-center gap-2 flex-shrink-0">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-xs sm:text-sm">LB</span>
-          </div>
+          <img src="/LetterBuzz.png" alt="LetterBuzz Logo" className="w-8 h-8 sm:w-9 sm:h-9 object-contain" />
           <span className="font-semibold text-base sm:text-lg tracking-tight">LetterBuzz</span>
         </div>
-        
+
         {/* Desktop Card Nav */}
         <div ref={navItemsRef} className="hidden md:block flex-shrink-0">
           <CardNav items={tabs} defaultActive={activeTab} />
@@ -124,21 +120,18 @@ const Navbar = () => {
                 <button
                   key={tab.id}
                   onClick={() => handleMobileNavClick(tab.href)}
-                  className={`text-left px-4 py-3 rounded-md transition-colors ${
-                    activeTab === tab.id
-                      ? 'bg-primary text-primary-foreground font-medium'
-                      : 'text-foreground hover:bg-muted'
-                  }`}
+                  className={`text-left px-4 py-3 rounded-md transition-colors ${activeTab === tab.id
+                    ? 'bg-primary text-primary-foreground font-medium'
+                    : 'text-foreground hover:bg-muted'
+                    }`}
                 >
                   {tab.label}
                 </button>
               ))}
               <div className="border-t border-border pt-4 mt-2 flex flex-col gap-2">
-                <Button variant="outline" className="w-full" asChild>
-                  <Link to="/login">Sign in</Link>
-                </Button>
+
                 <Button className="w-full" asChild>
-                  <Link to="/login?mode=signup">Get Started</Link>
+                  <Link to="/app">Get Started</Link>
                 </Button>
               </div>
             </div>
@@ -147,11 +140,9 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div ref={buttonsRef} className="hidden md:flex items-center gap-2 sm:gap-3 flex-shrink-0">
-          <Button variant="ghost" size="sm" asChild>
-            <Link to="/login">Sign in</Link>
-          </Button>
+
           <Button size="sm" className="text-xs sm:text-sm px-3 sm:px-4" asChild>
-            <Link to="/login?mode=signup">Get Started</Link>
+            <Link to="/app">Get Started</Link>
           </Button>
         </div>
       </nav>

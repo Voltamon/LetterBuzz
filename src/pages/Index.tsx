@@ -1,4 +1,5 @@
 import Hero from "@/components/landing/Hero";
+import Integrations from "@/components/landing/Integrations";
 import Features from "@/components/landing/Features";
 import HowItWorks from "@/components/landing/HowItWorks";
 import CTA from "@/components/landing/CTA";
@@ -11,6 +12,7 @@ const Index = () => {
         <Hero />
         <Features />
         <HowItWorks />
+        <Integrations standalone={true} />
         <CTA />
       </main>
       <Footer />

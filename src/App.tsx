@@ -6,12 +6,13 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "@/components/landing/Navbar";
 import Index from "./pages/Index";
-import IntegrationsPage from "./pages/Integrations";
-import Pricing from "./pages/Pricing";
-import Login from "./pages/Login";
+
+
+
 import NotFound from "./pages/NotFound";
 import Payment from "./pages/Payment";
 import HoverReceiver from "@/visual-edits/VisualEditsMessenger";
+import AppPage from "./pages/AppPage";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +28,7 @@ const ScrollToTop = () => {
 
 const AppLayout = () => {
   const location = useLocation();
-  const hideNavbar = location.pathname === "/login" || location.pathname === "/app";
+  const hideNavbar = location.pathname === "/app";
 
   return (
     <>
@@ -35,10 +36,10 @@ const AppLayout = () => {
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/integrations" element={<IntegrationsPage />} />
-        <Route path="/login" element={<Login />} />
+
+
         <Route path="/payment" element={<Payment />} />
+        <Route path="/app" element={<AppPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

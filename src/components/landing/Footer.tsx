@@ -32,12 +32,10 @@ const Footer = () => {
         <div ref={contentRef} className="flex flex-col items-center gap-6">
           {/* Brand */}
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">LB</span>
-            </div>
+            <img src="/LetterBuzz.png" alt="LetterBuzz Logo" className="w-8 h-8 object-contain" />
             <span className="font-semibold">LetterBuzz</span>
           </div>
-          
+
           <p className="text-sm text-muted-foreground text-center max-w-md">
             AI-powered newsletter analytics and content generation.
           </p>

@@ -123,166 +123,111 @@ const Integrations = ({ standalone = false }: IntegrationsProps) => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (standalone) {
-        // Set initial visibility to ensure elements are visible
-        gsap.set([badgeRef.current, headingRef.current, descriptionRef.current, bottomTextRef.current], {
-          opacity: 1
-        });
+      // Common initial states
+      gsap.set([badgeRef.current, headingRef.current, descriptionRef.current, bottomTextRef.current], {
+        opacity: 0,
+        y: 30
+      });
 
-        // Set cards to visible initially with permanent tilt
-        const cards = cardsRef.current?.children;
-        if (cards) {
-          Array.from(cards).forEach((card, index) => {
-            const permanentRotation = index === 0 ? -3 : index === 2 ? 3 : 0;
-            gsap.set(card, { opacity: 1, rotation: permanentRotation });
-          });
-        }
+      // Scroll-triggered animations for header elements
+      gsap.to(badgeRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
 
-        // Immediate animations for standalone page
-        const tl = gsap.timeline();
-        
-        tl.fromTo(badgeRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
-        )
-        .fromTo(headingRef.current,
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
-          "-=0.6"
-        )
-        .fromTo(descriptionRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-          "-=0.6"
-        );
+      gsap.to(headingRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.2,
+      });
 
-        // Cards animation with stagger - KEEP PERMANENT ROTATION
-        if (cards && cards.length > 0) {
-          Array.from(cards).forEach((card, index) => {
-            const permanentRotation = index === 0 ? -3 : index === 2 ? 3 : 0;
-            gsap.fromTo(card,
-              {
-                opacity: 0,
-                y: 60,
-                rotation: permanentRotation * 3,
-                scale: 0.9,
+      gsap.to(descriptionRef.current, {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.4,
+      });
+
+      // Cards animation with stagger - KEEP PERMANENT ROTATION
+      const cards = cardsRef.current?.children;
+      if (cards) {
+        Array.from(cards).forEach((card, index) => {
+          const permanentRotation = index === 0 ? -3 : index === 2 ? 3 : 0;
+          gsap.fromTo(card,
+            {
+              opacity: 0,
+              y: 60,
+              rotation: permanentRotation * 3,
+              scale: 0.9,
+            },
+            {
+              scrollTrigger: {
+                trigger: cardsRef.current,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
               },
-              {
-                opacity: 1,
-                y: 0,
-                rotation: permanentRotation, // Keep the permanent tilt
-                scale: 1,
-                duration: 1,
-                ease: "power3.out",
-                delay: 0.6 + (index * 0.15),
-              }
-            );
-          });
-        }
-
-        // Bottom text animation
-        tl.fromTo(bottomTextRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-          "-=0.3"
-        );
-
-        // Guides animation
-        if (guidesRef.current) {
-          gsap.fromTo(guidesRef.current?.children || [],
-            { opacity: 0, y: 40 },
-            { 
-              opacity: 1, 
-              y: 0, 
-              duration: 0.8, 
-              stagger: 0.2,
+              opacity: 1,
+              y: 0,
+              rotation: permanentRotation, // Keep permanent tilt
+              scale: 1,
+              duration: 1,
               ease: "power3.out",
-              delay: 1.2
+              delay: index * 0.15,
             }
           );
-        }
-      } else {
-        // Scroll-triggered animations for homepage section
-        gsap.from(badgeRef.current, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 0,
-          y: 30,
-          duration: 0.8,
-          ease: "power3.out",
         });
+      }
 
-        gsap.from(headingRef.current, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 0,
-          y: 40,
-          duration: 1,
-          ease: "power3.out",
-          delay: 0.2,
-        });
+      // Bottom text animation
+      gsap.to(bottomTextRef.current, {
+        scrollTrigger: {
+          trigger: bottomTextRef.current,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      });
 
-        gsap.from(descriptionRef.current, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 0,
-          y: 30,
-          duration: 0.8,
-          ease: "power3.out",
-          delay: 0.4,
-        });
-
-        // Cards animation with stagger - KEEP PERMANENT ROTATION
-        const cards = cardsRef.current?.children;
-        if (cards) {
-          Array.from(cards).forEach((card, index) => {
-            const permanentRotation = index === 0 ? -3 : index === 2 ? 3 : 0;
-            gsap.fromTo(card,
-              {
-                scrollTrigger: {
-                  trigger: cardsRef.current,
-                  start: "top 85%",
-                  toggleActions: "play none none reverse",
-                },
-                opacity: 0,
-                y: 60,
-                rotation: permanentRotation * 3,
-                scale: 0.9,
-              },
-              {
-                opacity: 1,
-                y: 0,
-                rotation: permanentRotation, // Keep permanent tilt
-                scale: 1,
-                duration: 1,
-                ease: "power3.out",
-                delay: index * 0.15,
-              }
-            );
-          });
-        }
-
-        // Bottom text animation
-        gsap.from(bottomTextRef.current, {
-          scrollTrigger: {
-            trigger: bottomTextRef.current,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-          opacity: 0,
-          y: 20,
-          duration: 0.8,
-          ease: "power3.out",
-        });
+      // Guides animation (only if standalone/full content is true)
+      if (standalone && guidesRef.current) {
+        gsap.fromTo(guidesRef.current.children,
+          { opacity: 0, y: 40 },
+          {
+            scrollTrigger: {
+              trigger: guidesRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out",
+          }
+        );
       }
     });
 
@@ -298,7 +243,7 @@ const Integrations = ({ standalone = false }: IntegrationsProps) => {
             Works with your stack
           </h2>
           <p ref={descriptionRef} className="text-lg text-muted-foreground">
-            Connect your existing newsletter platform in one click. 
+            Connect your existing newsletter platform in one click.
             We support all major providers and any RSS feed.
           </p>
         </div>
@@ -313,11 +258,11 @@ const Integrations = ({ standalone = false }: IntegrationsProps) => {
               <div className={`w-16 h-16 ${integration.color} flex items-center justify-center mb-6 text-2xl font-bold`}>
                 {integration.logo || (integration.icon && <integration.icon className="w-8 h-8" />)}
               </div>
-              
+
               <h3 className="text-xl font-semibold mb-2 tracking-tight">
                 {integration.name}
               </h3>
-              
+
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {integration.description}
               </p>
@@ -341,7 +286,7 @@ const Integrations = ({ standalone = false }: IntegrationsProps) => {
 
             <div ref={guidesRef} className="grid md:grid-cols-3 gap-8">
               {setupGuides.map((guide, guideIndex) => (
-                <div 
+                <div
                   key={guideIndex}
                   className="bg-background border border-border p-6 rounded-lg hover:border-primary/50 transition-colors"
                 >
@@ -363,7 +308,7 @@ const Integrations = ({ standalone = false }: IntegrationsProps) => {
                         <div className="absolute left-0 top-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
                           <span className="text-xs font-bold text-primary">{stepIndex + 1}</span>
                         </div>
-                        
+
                         {/* Connecting line (except for last item) */}
                         {stepIndex < guide.steps.length - 1 && (
                           <div className="absolute left-2.5 top-5 w-px h-full bg-border" />
